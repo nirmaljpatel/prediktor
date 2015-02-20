@@ -182,7 +182,8 @@ var parseFacebookUserSession = function (params) {
      * The actual middleware method.
      */
     return function (req, res, next) {
-        maybeLog("parse-facebook-user-session middleware");
+        maybeLog("parse-facebook-user-session middleware", req, " and path ", req.path);
+		
         // If the user is already logged in, there's nothing to do.
         if (Parse.User.current()) {
             maybeLog("...Already Parse user.current");

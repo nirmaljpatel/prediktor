@@ -4,9 +4,11 @@
 
     <h1>Prediktor</h1>
     <div class="main_content">
-  	<% seasons.forEach(function(season) { %>
-  		<div class="season_link">
-	  		<h1><a href="<%= '/seasons/' + season.id %>" ><%= season.get("name") %></a></h1>
+  	<% matches.forEach(function(match) { %>
+  		<div class="matchBox">
+	  		<div><%= match.get("description") %></div>
+			<div><%= match.get("groupName") %></div>
+			<div><%= match.get("matchDate") %></div>
   		</div>
     <% }) %>
 </div>
