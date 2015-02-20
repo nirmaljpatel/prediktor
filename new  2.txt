@@ -1,0 +1,16 @@
+Feature List
+
+[] Login with Facebook
+    [] Login with Facebook
+    [] Create Parse user based on Facebook data
+[] Predict todays Matches
+    [] Show list of todays matches
+    [] UX to predict a match result
+    [] Save prediction to Parse
+[] Score calculation
+    [] Award points based on predictions vs results
+[] Leaderboard
+    [] Show list of all players and their current scores
+[] My Profile
+    [] My Score, My Position 
+    [] List of my predictions

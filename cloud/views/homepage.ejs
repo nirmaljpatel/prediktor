@@ -1,0 +1,15 @@
+<!-- Include the header partial -->
+<% include _header %>
+<% include _headerBar %>
+
+    <h1>Prediktor</h1>
+    <div class="main_content">
+  	<% seasons.forEach(function(season) { %>
+  		<div class="season_link">
+	  		<h1><a href="<%= '/seasons/' + season.get('icc_id') %>" ><%= season.get("name") %></a></h1>
+  		</div>
+    <% }) %>
+</div>
+    
+<!-- Include the footer partial -->
+<% include _footer %>
