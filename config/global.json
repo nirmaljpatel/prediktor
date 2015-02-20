@@ -1,14 +1,14 @@
 {
     "applications": {
         "Prediktor": {
-            "applicationId": "chawe9LzqdIrsoo20Yz092PUwsw8Ce73lEh4mP9d", 
-            "masterKey": "Q2wXemhFYqxOXG6oKaRNSWVPgHiIPLaHiQDv2WaG"
+            "applicationId": "7SwbBY0RgSwVwwfaVbR74bfCZhsb8je5VSnh3jiK", 
+            "masterKey": "60zMfD58Nw1FgZ5cVjvS9EVhdRkpDhq1kxJRFWuh"
         }, 
         "_default": {
             "link": "Prediktor"
         }
     }, 
     "global": {
-        "parseVersion": "1.3.4"
+        "parseVersion": "1.3.5"
     }
 }
