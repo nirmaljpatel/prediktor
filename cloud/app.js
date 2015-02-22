@@ -5,8 +5,8 @@ var app = express();
 
 var _ = require('underscore');
 
-var seasonCtrlr = require('cloud/controllers/seasons.js');
-var matchCtrlr = require('cloud/controllers/matches.js');
+var seasonCtrlr = require('cloud/controllers/season.js');
+var matchCtrlr = require('cloud/controllers/match.js');
 
 var parseExpressHttpsRedirect = require('parse-express-https-redirect');
 var parseExpressCookieSession = require('parse-express-cookie-session');
@@ -17,9 +17,7 @@ app.set('views', 'cloud/views'); // Specify the folder to find templates
 app.set('view engine', 'ejs'); // Set the template engine
 
 app.use(parseExpressHttpsRedirect()); // Require user to be on HTTPS.
-
-
-app.use(express.cookieParser('1234567'));
+app.use(express.cookieParser('123321'));
 app.use(parseExpressCookieSession({
         cookie : {
             maxAge : 3600000
@@ -32,6 +30,7 @@ app.use(parseFacebookUserSession({
         verbose : true,
         redirectUri : '/login',
     }));
+
 app.use(express.bodyParser()); // Middleware for reading request body
 
 
@@ -44,7 +43,7 @@ app.locals.formatTime = function(time) {
 // The homepage renders differently depending on whether user is logged in.
 app.get('/', seasonCtrlr.list);
 app.get('/seasons/:seasonId', matchCtrlr.list);
-
+app.get('/match/dummy/create/:name', matchCtrlr.create);
 
 // You could have a "Log Out" link on your website pointing to this.
 app.get('/logout', function (req, res) {

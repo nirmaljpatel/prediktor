@@ -1,14 +1,14 @@
 
-var season = Parse.Object.extend("Seasons");
+var Season = Parse.Object.extend("season");
 
 //Lists all Seasons
 exports.list = function (req, res) {
-    console.log("Routing for /",req);
+    console.log("Routing for /");
     if (Parse.User.current()) {
         console.log("...We have a Parse user!!!");
         // No need to fetch the current user for querying Note objects.
 
-        var query = new Parse.Query(season);
+        var query = new Parse.Query(Season);
         query.find().then(function (results) {
             console.log(results);
             res.render('homepage.ejs', {
