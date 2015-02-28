@@ -24,36 +24,34 @@ exports.list = function (req, res) {
 		matchQuery.startsWith('matchDate', getDateAsStringAsStoredInParse(matchesForDate));
 		matchQuery.include("playingTeams");
 		matchQuery.include("venue");
+		//matchQuery.include("prediktions");
 
 		var todaysMatches;
         matchQuery.find().then(function (poMatches) {
 			todaysMatches = poMatches;
-			//for(var i=0; i< poMatches.length; i++){
-			//		todaysMatches[i] = poMatches[i].toJSON();
-			//}
+
 			var usersPrediktionsQuery = new Parse.Query(Prediktion);
 			usersPrediktionsQuery.equalTo("user", Parse.User.current());
 			usersPrediktionsQuery.containedIn("match", poMatches);
 			usersPrediktionsQuery.include("match");
 			
 			usersPrediktionsQuery.find().then(function(usersPrediktions){
-				console.log(usersPrediktions);
+				//console.log(usersPrediktions);
 				for(var i=0; i < todaysMatches.length; i++) {
 					//console.log(todaysMatches[i]);
 					var match = todaysMatches[i];
 					var pred = _.filter(usersPrediktions, function(prediktion){
-							console.log(prediktion.get("match").id);
-							console.log(match.id);
 							return prediktion.get("match").id === match.id;
 					});
 					//console.log(pred);
-					match["prediktion"] = pred;
-					match["author"] = "Nirmal";
-					console.log(match);
+					//match.set('prediktion', pred);
+					//match.set("author", "Nirmal");
+					//console.log(match);
 				}
-				console.log(todaysMatches);
+				console.log("todaysMatches before going to ejs");
+				console.log(poMatches);
 				res.render('matches.ejs', {
-					matches : todaysMatches,
+					matches : poMatches,
 					season: season,
 					prediktions: usersPrediktions
 				});

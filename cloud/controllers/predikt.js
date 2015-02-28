@@ -14,7 +14,7 @@ exports.save = function (req, res) {
         // No need to fetch the current user for querying Note objects.
 		
 		var prediktion = new Prediktion();
-		
+	
 		var match = new Match();
 		match.id = req.params.matchId;
 		prediktion.set('match', match);
@@ -26,15 +26,18 @@ exports.save = function (req, res) {
 		prediktion.set('winner', winner);
 		//console.log(req.body);
 		
-		prediktion.save().then(
-				function(){
-					res.redirect('/seasons/' + req.params.seasonId);
-				},
-				function(){
-						res.send(500, 'Failed saving prediktion.');
-				}
-		);
-        
+		
+		prediktion.save().then(function(savedPrediktion){
+				var relation = match.relation("prediktions");
+				relation.add(savedPrediktion);
+				return match.save();
+		}).then(function(savedMatch){
+			console.log(savedMatch);
+			res.redirect('/seasons/' + req.params.seasonId);
+		}, function(error){
+			console.log(error);
+			res.send(500, 'Failed saving prediktion.');
+		});        
     } else {
         console.log("...We dont have a Parse user!!!");
         // Render a public welcome page, with a link to the '/login' endpoint.
