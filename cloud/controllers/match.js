@@ -5,6 +5,7 @@ var _ = require('underscore');
 var Season = Parse.Object.extend("season");
 var Match = Parse.Object.extend("match");
 var Team = Parse.Object.extend("team");
+var Prediktion = Parse.Object.extend("prediktion");
 
 //Displays today's matches
 exports.list = function (req, res) {
@@ -12,29 +13,53 @@ exports.list = function (req, res) {
         console.log("...We have a Parse user!!!");
         // No need to fetch the current user for querying Note objects.
 
-        var matchesQuery = new Parse.Query(Match);
+        var matchQuery = new Parse.Query(Match);
 
         var season = new Season();
         season.id = req.params.seasonId;
-        //matchesQuery.equalTo("season", season);
+        matchQuery.equalTo("season", season);
         
-		matchesQuery.startsWith('matchDate', getDateAsStringAsStoredInParse(new Date()));
-		matchesQuery.include("season");
-		//matchesQuery.include(["season.name"]);
+		var matchesForDate = moment().add('days', 1);
 
-        matchesQuery.find().then(function (matches) {
-			console.log(matches);
-			for(var i=0; i < matches.length; i++){
-				var season = matches[i].get("season");
-				console.log(season);
-				//console.log(matches[i].get("season.name"));
-			}
-			res.render('matches.ejs', {
-				matches : matches
+		matchQuery.startsWith('matchDate', getDateAsStringAsStoredInParse(matchesForDate));
+		matchQuery.include("playingTeams");
+		matchQuery.include("venue");
+
+		var todaysMatches;
+        matchQuery.find().then(function (poMatches) {
+			todaysMatches = poMatches;
+			//for(var i=0; i< poMatches.length; i++){
+			//		todaysMatches[i] = poMatches[i].toJSON();
+			//}
+			var usersPrediktionsQuery = new Parse.Query(Prediktion);
+			usersPrediktionsQuery.equalTo("user", Parse.User.current());
+			usersPrediktionsQuery.containedIn("match", poMatches);
+			usersPrediktionsQuery.include("match");
+			
+			usersPrediktionsQuery.find().then(function(usersPrediktions){
+				console.log(usersPrediktions);
+				for(var i=0; i < todaysMatches.length; i++) {
+					//console.log(todaysMatches[i]);
+					var match = todaysMatches[i];
+					var pred = _.filter(usersPrediktions, function(prediktion){
+							console.log(prediktion.get("match").id);
+							console.log(match.id);
+							return prediktion.get("match").id === match.id;
+					});
+					//console.log(pred);
+					match["prediktion"] = pred;
+					match["author"] = "Nirmal";
+					console.log(match);
+				}
+				console.log(todaysMatches);
+				res.render('matches.ejs', {
+					matches : todaysMatches,
+					season: season,
+					prediktions: usersPrediktions
+				});
 			});
-            
         },
-            function (error) {
+        function (error) {
 				console.log(error);
             // Render error page.
             res.render('error.ejs');
@@ -44,6 +69,20 @@ exports.list = function (req, res) {
         // Render a public welcome page, with a link to the '/login' endpoint.
         res.render('defaultPage.ejs');
     }
+};
+var findMyMatchPrediktions = function(match){
+		var promise = new Parse.Promise();
+		
+		var predikQuery = new Parse.Query(Prediktion);
+		predikQuery.equalTo("user", Parse.User.current());
+		predikQuery.equalTo("match", match);
+	
+		predikQuery.find().then(function(prediktion){
+				match.prediktion = prediktion;
+				promise.resolve();
+		});
+		
+		return promise;
 };
 //Creates a dummy match data
 exports.create = function(req, res){
@@ -61,11 +100,19 @@ exports.create = function(req, res){
 			var aMatch = new Match();
 			aMatch.set("name", "dummyMatch-"+req.params.name);
 			aMatch.set("matchDate", getDateAsStringAsStoredInParse(new Date()));
-			aMatch.set("parent", aSeason); //One Season has Many Matches
+			aMatch.set("season", aSeason); //One Season has Many Matches
 		
+			/*** Parse Relation *** 
 			var relation = aMatch.relation("playingteams");
 			relation.add(aTeam);
 			relation.add(bTeam);
+			
+			*** Parse Realtion ***/
+			
+			/*** Array of Parse Objects ***/
+			var playingTeams = [aTeam, bTeam];
+			aMatch.set("playingTeams", playingTeams);
+			/*** Array of Parse Objects */
 			
 			return aMatch.save();
 		}).then(function(obj){

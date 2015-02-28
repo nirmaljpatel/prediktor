@@ -6,11 +6,26 @@
     <div class="main_content">
   	<% matches.forEach(function(match) { %>
   		<div class="matchBox">
-	  		<div><%= match.get("description") %></div>
-			<div><%= match.get("groupName") %></div>
-			<div><%= match.get("matchDate") %></div>
+			<form method='post' action="<%= '/seasons/' + season.id +'/matches/' + match.id + '/prediktions' %>">
+				<div><%= match.get("description") %></div>
+				<div><%= match.get("groupName") %></div>
+				<div><%= formatTime(match.get("matchDate")) %></div>
+				<div><%= (match.get("matchDate")) %></div>
+				<div><%= match.get("venue")[0].fullName %></div>
+				<div class="teams">
+					<% var teams = match.get("teams") %>
+					<% teams.forEach(function(team) { %>
+						<% include _team %>
+					<% }) %>
+				</div>
+				<input type='submit' class="btn_submit" value="Predikt" />
+			</form>
   		</div>
     <% }) %>
+	<% prediktions.forEach(function(prediktion) { %>
+		<div><%= prediktion.get("match").id %></div>
+		<div><%= prediktion.get("winner").id %></div>
+	<% }) %>
 </div>
     
 <!-- Include the footer partial -->

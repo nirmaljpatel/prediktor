@@ -4,9 +4,11 @@ var express = require('express');
 var app = express();
 
 var _ = require('underscore');
+var moment = require('moment');
 
 var seasonCtrlr = require('cloud/controllers/season.js');
 var matchCtrlr = require('cloud/controllers/match.js');
+var prediktCtrlr = require('cloud/controllers/predikt.js');
 
 var parseExpressHttpsRedirect = require('parse-express-https-redirect');
 var parseExpressCookieSession = require('parse-express-cookie-session');
@@ -37,12 +39,16 @@ app.use(express.bodyParser()); // Middleware for reading request body
 // You can use app.locals to store helper methods so that they are accessible from templates.
 app.locals._ = _;
 app.locals.formatTime = function(time) {
-  return moment(time).format('MMMM Do YYYY, h:mm a');
+  return moment(time, moment.ISO_8601).format('MMMM Do YYYY, h:mm a Z');
 };
 
 // The homepage renders differently depending on whether user is logged in.
 app.get('/', seasonCtrlr.list);
 app.get('/seasons/:seasonId', matchCtrlr.list);
+app.post('/seasons/:seasonId/matches/:matchId/prediktions', prediktCtrlr.save);
+
+
+//Test code
 app.get('/match/dummy/create/:name', matchCtrlr.create);
 
 // You could have a "Log Out" link on your website pointing to this.
