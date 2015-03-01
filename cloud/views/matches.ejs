@@ -14,8 +14,10 @@
 			<form method='post' action="<%= '/seasons/' + season.id +'/matches/' + match.id + '/prediktions' %>">
 				<div><%= match.get("description") %></div>
 				<div><%= match.get("groupName") %></div>
+				<!--
 				<div><%= formatTime(match.get("matchDate")) %></div>
 				<div><%= (match.get("matchDate")) %></div>
+				-->
 				<div><%= match.get("venue")[0].fullName %></div>
 				<div class="teams">
 					<% var teams = match.get("teams") %>
@@ -26,7 +28,6 @@
 				<% if(!matchPred){ %>
 					<input type='submit' class="btn_submit" value="Predikt" />
 				<% } %>
-				<input type='submit' class="btn_submit" value="Predikt" />
 			</form>
   		</div>
     <% }) %>

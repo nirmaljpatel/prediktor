@@ -3,8 +3,8 @@ var Prediktion = Parse.Object.extend("prediktion");
 Parse.Cloud.beforeSave("prediktion", function(request, response) {
 		
 	var usersPrediktionsQuery = new Parse.Query(Prediktion);
-	usersPrediktionsQuery.equalTo("user", req.user);
-	usersPrediktionsQuery.equalTo("match", req.object.get("match"));
+	usersPrediktionsQuery.equalTo("user", request.user);
+	usersPrediktionsQuery.equalTo("match", request.object.get("match"));
 	usersPrediktionsQuery.include("match");
 	
 	usersPrediktionsQuery.find().then(
