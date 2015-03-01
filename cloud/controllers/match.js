@@ -19,43 +19,46 @@ exports.list = function (req, res) {
         season.id = req.params.seasonId;
         matchQuery.equalTo("season", season);
         
-		var matchesForDate = moment().add('days', 1);
+		var matchesForDate = moment().add('days', 2);
+		
+		console.log(matchesForDate);
+		
 
 		matchQuery.startsWith('matchDate', getDateAsStringAsStoredInParse(matchesForDate));
 		matchQuery.include("playingTeams");
 		matchQuery.include("venue");
 		//matchQuery.include("prediktions");
+		
+		var usersPrediktionsQuery = new Parse.Query(Prediktion);
+		usersPrediktionsQuery.equalTo("user", Parse.User.current());
+		//usersPrediktionsQuery.containedIn("match", poMatches);
+		//usersPrediktionsQuery.include("match");
+		
+		//matchQuery.matchesQuery( "prediktions", usersPrediktionsQuery);
 
+		var promises = [];
 		var todaysMatches;
         matchQuery.find().then(function (poMatches) {
-			todaysMatches = poMatches;
-
-			var usersPrediktionsQuery = new Parse.Query(Prediktion);
-			usersPrediktionsQuery.equalTo("user", Parse.User.current());
-			usersPrediktionsQuery.containedIn("match", poMatches);
-			usersPrediktionsQuery.include("match");
-			
-			usersPrediktionsQuery.find().then(function(usersPrediktions){
-				//console.log(usersPrediktions);
-				for(var i=0; i < todaysMatches.length; i++) {
-					//console.log(todaysMatches[i]);
-					var match = todaysMatches[i];
-					var pred = _.filter(usersPrediktions, function(prediktion){
-							return prediktion.get("match").id === match.id;
-					});
-					//console.log(pred);
-					//match.set('prediktion', pred);
-					//match.set("author", "Nirmal");
-					//console.log(match);
-				}
-				console.log("todaysMatches before going to ejs");
-				console.log(poMatches);
+				todaysMatches = poMatches;
+				_.each(poMatches, function(match){
+					var usersPrediktionsQuery = new Parse.Query(Prediktion);
+					usersPrediktionsQuery.equalTo("user", Parse.User.current());
+					usersPrediktionsQuery.equalTo("match", match);
+					usersPrediktionsQuery.include("match");
+					
+					promises.push(usersPrediktionsQuery.first());
+				});
+				return Parse.Promise.when(promises);
+		}).then(function(){
+				var usersPrediktions = Array.prototype.slice.call(arguments);
+				//console.log(todaysMatches);
+				console.log(usersPrediktions);
 				res.render('matches.ejs', {
-					matches : poMatches,
+					fordate: matchesForDate.format("MMM Do YYYY"),
+					matches : todaysMatches,
 					season: season,
 					prediktions: usersPrediktions
 				});
-			});
         },
         function (error) {
 				console.log(error);

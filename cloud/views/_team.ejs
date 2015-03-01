@@ -1,1 +1,5 @@
-<input type="radio" name="winner" value="<%= team.objectId %>"><%= team.fullName %></input>
+<% if(matchPred && matchPred.get("winner").id === team.objectId){ %>
+	<input type="radio" name="winner" value="<%= team.objectId %>" checked="true"><%= team.fullName %></input>
+<% }else{ %>
+	<input type="radio" name="winner" value="<%= team.objectId %>"><%= team.fullName %></input>
+<% } %>

@@ -41,6 +41,21 @@ app.locals._ = _;
 app.locals.formatTime = function(time) {
   return moment(time, moment.ISO_8601).format('MMMM Do YYYY, h:mm a Z');
 };
+app.locals.scripts = [];
+app.locals.addScripts=function (all) {
+    app.locals.scripts = [];
+    if (all != undefined) {
+        return all.map(function(script) {
+            return "<script src='/javascripts/" + script + "'></script>";
+        }).join('\n ');
+    }
+    else {
+        return '';
+    }
+};
+app.locals.getScripts = function(req, res) {
+    return scripts;
+};
 
 // The homepage renders differently depending on whether user is logged in.
 app.get('/', seasonCtrlr.list);
