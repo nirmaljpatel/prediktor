@@ -9,6 +9,8 @@ var moment = require('moment');
 var seasonCtrlr = require('cloud/controllers/season.js');
 var matchCtrlr = require('cloud/controllers/match.js');
 var prediktCtrlr = require('cloud/controllers/predikt.js');
+var userCtrlr = require('cloud/controllers/user.js');
+
 
 var parseExpressHttpsRedirect = require('parse-express-https-redirect');
 var parseExpressCookieSession = require('parse-express-cookie-session');
@@ -61,6 +63,8 @@ app.locals.getScripts = function(req, res) {
 app.get('/', seasonCtrlr.list);
 app.get('/seasons/:seasonId', matchCtrlr.list);
 app.post('/seasons/:seasonId/matches/:matchId/prediktions', prediktCtrlr.save);
+
+app.get('/user', userCtrlr.list);
 
 
 //Test code

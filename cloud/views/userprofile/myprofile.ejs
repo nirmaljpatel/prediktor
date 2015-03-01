@@ -1,0 +1,13 @@
+<!-- Include the header partial -->
+<% scripts.push('underscore-min.js') %>
+<% include ../_header %>
+<% include ../_headerBar %>
+
+<div class="main_content">
+	<div class="meBox"><%= user.get('name') %></div>
+	
+	<% include _listPrediktions.ejs%>
+</div>
+    
+<!-- Include the footer partial -->
+<% include ../_footer %>
