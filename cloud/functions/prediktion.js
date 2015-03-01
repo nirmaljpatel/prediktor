@@ -1,11 +1,21 @@
 var Prediktion = Parse.Object.extend("prediktion");
 
 Parse.Cloud.beforeSave("prediktion", function(request, response) {
-		
+
+	var match = request.object.get("match");
+	var matchState = match.get("matchState");
+	
+	if ( matchState === "C") {
+			response.error("111: Cannot add prediktion for a Completed match.");
+	} 
+	
+	//ToDo: Allow saving a prediktion only if currTime < matchStarttime
+	
 	var usersPrediktionsQuery = new Parse.Query(Prediktion);
 	usersPrediktionsQuery.equalTo("user", request.user);
-	usersPrediktionsQuery.equalTo("match", request.object.get("match"));
+	usersPrediktionsQuery.equalTo("match", match);
 	usersPrediktionsQuery.include("match");
+	
 	
 	usersPrediktionsQuery.find().then(
 	function(foundPred){
