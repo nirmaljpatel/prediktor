@@ -8,7 +8,7 @@ var Prediktion = Parse.Object.extend("prediktion");
 
 //Save a prediktion
 exports.save = function (req, res) {
-    console.log("Routing for /");
+    console.log("Saving a Prediktion.");
     if (Parse.User.current()) {
         console.log("...We have a Parse user!!!");
         // No need to fetch the current user for querying Note objects.
@@ -43,4 +43,30 @@ exports.save = function (req, res) {
         // Render a public welcome page, with a link to the '/login' endpoint.
         res.render('defaultPage.ejs');
     }
+};
+
+exports.delete = function (req, res) {
+	console.log("Deleting a Prediktion");
+	if(Parse.User.current()) {
+		console.log("...We have a Parse user!!!");
+		
+		var prediktion = new Prediktion();
+		prediktion.id = req.params.predId;
+		
+		prediktion.destroy({
+			success: function(myObject) {
+				// The object was deleted from the Parse Cloud.
+				res.redirect('/user');
+			},
+			error: function(myObject, error) {
+				console.log(error);
+				res.send(500, 'Failed to delete prediktion.');
+			}
+		});
+		
+	} else {
+		console.log("...We dont have a Parse user!!!");
+		// Render a public welcome page, with a link to the '/login' endpoint.
+		res.render('defaultPage.ejs');
+	}
 };

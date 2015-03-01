@@ -6,10 +6,10 @@ Parse.Cloud.beforeSave("prediktion", function(request, response) {
 	var matchState = match.get("matchState");
 	
 	if ( matchState === "C") {
-			response.error("111: Cannot add prediktion for a Completed match.");
+			response.error("103: Cannot add prediktion for a Completed match.");
 	} 
 	
-	//ToDo: Allow saving a prediktion only if currTime < matchStarttime
+	//ToDo: Allow saving a prediktion only if currTime < matchStartTime
 	
 	var usersPrediktionsQuery = new Parse.Query(Prediktion);
 	usersPrediktionsQuery.equalTo("user", request.user);
@@ -30,4 +30,15 @@ Parse.Cloud.beforeSave("prediktion", function(request, response) {
 		response.error("101: Error when trying to find prediktions.");
 	}
 	);
+});
+
+Parse.Cloud.beforeDelete("prediktion", function(request, response){
+	var match = request.object.get("match");
+	var matchState = match.get("matchState");
+	
+	if ( matchState === "C") {
+		response.error("111: Cannot delete prediktion for a Completed match.");
+	} 
+	//ToDo: Allow delete only if currTime < matchStartTime
+	response.success();
 });

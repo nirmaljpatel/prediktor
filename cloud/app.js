@@ -36,6 +36,8 @@ app.use(parseFacebookUserSession({
     }));
 
 app.use(express.bodyParser()); // Middleware for reading request body
+app.use(express.methodOverride());
+
 
 
 // You can use app.locals to store helper methods so that they are accessible from templates.
@@ -63,6 +65,7 @@ app.locals.getScripts = function(req, res) {
 app.get('/', seasonCtrlr.list);
 app.get('/seasons/:seasonId', matchCtrlr.list);
 app.post('/seasons/:seasonId/matches/:matchId/prediktions', prediktCtrlr.save);
+app.del('/matches/:matchId/prediktions/:predId', prediktCtrlr.delete);
 
 app.get('/user', userCtrlr.list);
 

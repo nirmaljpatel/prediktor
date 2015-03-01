@@ -9,10 +9,16 @@
 		<div><%= formatTime(match.get("matchDate")) %></div>
 		<div class="teams">
 			<% var teams = match.get("teams") %>
-			<form>
+			<form method='post' action="<%= '/matches/' + match.id + '/prediktions/' + matchPred.id%>">
 				<% teams.forEach(function(team) { %>
 					<% include ../_team %>
 				<% }) %>
+				<% if(match.get("matchState") === "U"){%>
+					<!-- This hidden element causes express.methodOverride middleware to override
+						the HTTP method from post to delete for a truly RESTful interface. -->
+					<input type='hidden' name='_method' value='delete' />
+					<input type='submit' class="btn_submit" value="Delete" />
+				<% } %>
 			</form>
 		</div>
 	</li>
