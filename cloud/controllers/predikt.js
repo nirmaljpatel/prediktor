@@ -36,7 +36,7 @@ exports.save = function (req, res) {
 			res.redirect('/seasons/' + req.params.seasonId);
 		}, function(error){
 			console.log(error);
-			res.send(500, 'Failed saving prediktion.');
+			res.send(500, 'Failed saving prediktion:'+ error.message);
 		});        
     } else {
         console.log("...We dont have a Parse user!!!");

@@ -10,10 +10,10 @@
 			<li class="matchBox">
 				<div><%= match.get("description") %></div>
 				<div><%= match.get("groupName") %></div>
-				<!--
+				
 					<div><%= formatTime(match.get("matchDate")) %></div>
 					<div><%= (match.get("matchDate")) %></div>
-				-->
+				
 				<div><%= match.get("venue")[0].fullName %></div>
 			
 			<% var matchPred = _.find(prediktions, function(pred){ %>
