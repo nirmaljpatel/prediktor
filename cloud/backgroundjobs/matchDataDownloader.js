@@ -7,21 +7,13 @@ var iccMatchDataUrl = "http://cdn.pulselive.com/dynamic/data/core/cricket/2012/c
 
 Parse.Cloud.job("matchDataDownloader", function(request, status) {
 	status.message("MatchDataDownloader Background Job Started...");
-		
-	Parse.Cloud.httpRequest({
-		url: iccMatchDataUrl,
-		success: function(httpResponse) {
-			//console.log(httpResponse.text);
-			jsonObj = removeJsonP(httpResponse.text);
-			updateWCSchedule(jsonObj).then(function(){
-					status.success("Match data updated successfully at: " +new Date());
-			}
-			);
-		},
-		error: function(httpResponse) {
-			// Set the job's error status
-			status.error("Request failed with response code ' + httpResponse.status");
-		}
+	
+	fetchMatchData().then(function(jsonObj){
+			updateWCSchedule(jsonObj);
+	}).then(function(){
+			status.success("MatchDataDownloader completed successfully at: " +new Date());
+	},function(error){
+			status.error("MatchDataDownloader Failed: " + error);
 	});
 });
 
@@ -34,7 +26,22 @@ var removeJsonP = function(response) {
 		
 		return JSON.parse(jsonStr);
 };
+var fetchMatchData = function(){
+	var promise = new Parse.Promise();
 
+	Parse.Cloud.httpRequest({
+		url: iccMatchDataUrl,
+		success: function(httpResponse) {
+			//console.log(httpResponse.text);
+			jsonObj = removeJsonP(httpResponse.text);
+			promise.resolve(jsonObj);
+		},
+		error: function(httpResponse) {
+			promise.reject("Request failed with response code: " + httpResponse.status);
+		}
+	});
+	return promise;
+};
 var updateWCSchedule = function(scheduleJson) {
 	//console.log(scheduleJson);
 		
