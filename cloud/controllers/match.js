@@ -2,6 +2,8 @@
 var moment = require('moment');
 var _ = require('underscore');
 
+var util = require('cloud/util.js');
+
 var Season = Parse.Object.extend("season");
 var Match = Parse.Object.extend("match");
 var Team = Parse.Object.extend("team");
@@ -24,7 +26,7 @@ exports.list = function (req, res) {
 		console.log(tomorrow);
 		
 
-		matchQuery.startsWith('matchDate', getDateAsStringAsStoredInParse(tomorrow));
+		matchQuery.startsWith('matchDate', util.getDateAsStringAsStoredInParse(tomorrow));
 		matchQuery.include("playingTeams");
 		matchQuery.include("venue");
 		//matchQuery.include("prediktions");
@@ -54,7 +56,7 @@ exports.list = function (req, res) {
 				//console.log(todaysMatches);
 				console.log(usersPrediktions);
 				res.render('matches.ejs', {
-					fordate: matchesForDate.format("MMM Do YYYY"),
+					fordate: tomorrow.format("MMM Do YYYY"),
 					matches : todaysMatches,
 					season: season,
 					prediktions: usersPrediktions
@@ -119,9 +121,4 @@ exports.create = function(req, res){
 		}).then(function(obj){
 			console.log("Everything done to add a dummy match");
 		});
-};
-
-var getDateAsStringAsStoredInParse = function (time) {
-    //2015-03-29T14:30:00+1100
-    return moment(time).format('YYYY-MM-DD');
 };
