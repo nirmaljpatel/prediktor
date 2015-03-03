@@ -41,13 +41,21 @@ Parse.Cloud.beforeSave("prediktion", function(request, response) {
 
 Parse.Cloud.beforeDelete("prediktion", function(request, response){
 	var match = request.object.get("match");
-	var matchState = match.get("matchState");
 	
-	if ( matchState === "C") {
-		response.error("111: Cannot delete prediktion for a Completed match.");
-	} 
-	//ToDo: Allow delete only if currTime < matchStartTime
-	response.success();
+	match.fetch().then(function(){
+		var matchState = match.get("matchState");
+		
+		if ( matchState === "C") {
+			response.error("111: Cannot delete prediktion for a Completed match.");
+		} else if(hasMatchStarted(match)) {
+			response.error("104: Cannot delete prediktion for a match after its start time.");
+		}
+		response.success();
+	},
+	function(error){
+		console.log(error);
+		response.error("101: Error when trying to deleting prediktion.");
+	});
 });
 
 var hasMatchStarted = function(match) {
