@@ -19,7 +19,7 @@ exports.list = function (req, res) {
         season.id = req.params.seasonId;
         matchQuery.equalTo("season", season);
         
-		var matchesForDate = moment().add('days', 2);
+		var matchesForDate = moment().add('days', 1);
 		
 		console.log(matchesForDate);
 		
