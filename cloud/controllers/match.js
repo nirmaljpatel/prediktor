@@ -19,12 +19,12 @@ exports.list = function (req, res) {
         season.id = req.params.seasonId;
         matchQuery.equalTo("season", season);
         
-		var matchesForDate = moment().add('days', 1);
+		var tomorrow = moment().add('days', 1);
 		
-		console.log(matchesForDate);
+		console.log(tomorrow);
 		
 
-		matchQuery.startsWith('matchDate', getDateAsStringAsStoredInParse(matchesForDate));
+		matchQuery.startsWith('matchDate', getDateAsStringAsStoredInParse(tomorrow));
 		matchQuery.include("playingTeams");
 		matchQuery.include("venue");
 		//matchQuery.include("prediktions");
