@@ -6,7 +6,7 @@ var iccMatchDataUrl = "http://cdn.pulselive.com/dynamic/data/core/cricket/2012/c
 
 
 Parse.Cloud.job("matchDataDownloader", function(request, status) {
-	console.log("MatchDataDownloader Background Job Started...");
+	status.message("MatchDataDownloader Background Job Started...");
 		
 	Parse.Cloud.httpRequest({
 		url: iccMatchDataUrl,
@@ -14,7 +14,6 @@ Parse.Cloud.job("matchDataDownloader", function(request, status) {
 			//console.log(httpResponse.text);
 			jsonObj = removeJsonP(httpResponse.text);
 			updateWCSchedule(jsonObj).then(function(){
-					console.log("Looks like everything worked... calling status.success");
 					status.success("Match data updated successfully at: " +new Date());
 			}
 			);
