@@ -84,7 +84,7 @@ var updateWCSchedule = function(scheduleJson) {
 			shortName : venue.shortName,
 			city : venue.city
 		};
-		if (_.where(venues, venueData) == null) {
+		if (_.find(venues, function(venue){return venue.venueId === venueData.venueId;}) == null) {
 			venues.push(venueData);
 		}
 		if (match.team1 !== undefined) {
@@ -98,7 +98,7 @@ var updateWCSchedule = function(scheduleJson) {
 				secondaryColor : team.secondaryColor,
 				teamId : team.id
 			};
-			if (_.where(teams, teamData) == null) {
+			if (_.find(teams, function(team){return team.teamId === teamData.teamId;}) == null) {
 				teams.push(teamData);
 			}
 			team = match.team2.team;
@@ -111,7 +111,7 @@ var updateWCSchedule = function(scheduleJson) {
 				secondaryColor : team.secondaryColor,
 				teamId : team.id
 			};
-			if (_.where(teams, teamData) == null) {
+			if (_.find(teams, function(team){return team.teamId === teamData.teamId;}) == null) {
 				teams.push(teamData);
 			}
 		}
