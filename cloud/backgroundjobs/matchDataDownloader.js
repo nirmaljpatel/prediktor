@@ -15,6 +15,7 @@ Parse.Cloud.job("matchDataDownloader", function(request, status) {
 	
 	fetchMatchData().then(function(jsonObj){
 			console.log("Then... updateWCSchedule()");
+			console.log(jsonObj);
 			updateWCSchedule(jsonObj);
 	}).then(function(){
 		console.log("Then... updateScores()");
@@ -114,7 +115,7 @@ var updateWCSchedule = function(scheduleJson) {
 	
 	for (var i = 0; i < totalMatches; i++) {
 		var match = wc.schedule[i];
-		//console.log("["+i+"]: ", match);
+		console.log("["+i+"]: ", match);
 		
 		var matchData = {
 			matchId : match.matchId.id,
@@ -159,6 +160,8 @@ var updateWCSchedule = function(scheduleJson) {
 			if (_.find(teams, function(team){return team.teamId === teamData.teamId;}) == null) {
 				teams.push(teamData);
 			}
+		}
+		if (match.team2 !== undefined) {
 			team = match.team2.team;
 			teamData = {
 				type : team.type,
