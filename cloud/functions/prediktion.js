@@ -6,6 +6,10 @@ Parse.Cloud.beforeSave("prediktion", function(request, response) {
 
 	var match = request.object.get("match");
 	
+	if(isScoreUpdate) {
+			response.success();
+	}
+	
 	match.fetch().then(function(){
 	
 		var matchState = match.get("matchState");
@@ -71,4 +75,10 @@ var hasMatchStarted = function(match) {
 		
 		
 		return now > matchMoment;
+};
+
+var isScoreUpdate = function(req) {
+		var dirtyKeys = req.object.dirtyKeys();
+		//console.log(dirtyKeys);
+		return (dirtyKeys.length === 1) && dirtyKey[0] === "score";
 };

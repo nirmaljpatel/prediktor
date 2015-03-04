@@ -1,6 +1,11 @@
 
 var _ = require('underscore');
+var moment = require('moment');
+
+var util = require('cloud/util.js');
+
 var Match = Parse.Object.extend("match");
+var Prediktion = Parse.Object.extend("prediktion");
 
 var iccMatchDataUrl = "http://cdn.pulselive.com/dynamic/data/core/cricket/2012/cwc-2015/matchSchedule2.js";
 
@@ -9,16 +14,63 @@ Parse.Cloud.job("matchDataDownloader", function(request, status) {
 	status.message("MatchDataDownloader Background Job Started...");
 	
 	fetchMatchData().then(function(jsonObj){
+			console.log("Then... updateWCSchedule()");
 			updateWCSchedule(jsonObj);
 	}).then(function(){
+		console.log("Then... updateScores()");
+		//Somehow the following does not work when I put the block in a function
+		var yesterday = moment().subtract('days', 1);
+		console.log(yesterday);
+		var matchQuery = new Parse.Query(Match);
+		matchQuery.startsWith('matchDate', util.getDateAsStringAsStoredInParse(yesterday));
+		
+		var prediktionQuery = new Parse.Query(Prediktion);
+		prediktionQuery.matchesKeyInQuery("match", "objectId", matchQuery);
+		prediktionQuery.include("match");
+		prediktionQuery.include("winner");
+		
+		var promises = [];
+		return prediktionQuery.find().then(function(yesterdaysPrediktions){
+			_.each(yesterdaysPrediktions, function(prediktion){
+				var matchWinner = getWinnerTeamId(prediktion.get("match"));
+				var points = 0;
+				if(prediktion.get("winner").get("teamId") === matchWinner){
+						points = 10;
+				}
+				prediktion.set("score", points);
+				promises.push( prediktion.save());
+			});
+			return Parse.Promise.when(promises);
+		});
+	}).then(function(){
+			console.log("Then... set success.");
 			status.success("MatchDataDownloader completed successfully at: " +new Date());
 	},function(error){
 			status.error("MatchDataDownloader Failed: " + error);
 	});
 });
 
+var getWinnerTeamId = function (match) {
+		//matchStatus format: {"outcome":"A","text":"Pakistan won by 20 runs"}
+		var winner;
+		var matchStatus = match.get("matchStatus");
+		//console.log(matchStatus);
+		if(matchStatus !== null && matchStatus.outcome === "A"){
+				//console.log("...A");
+				winner =  match.get("team1");
+		}else if(matchStatus !== null && matchStatus.outcome === "B"){
+				//console.log("...B");
+				winner = match.get("team2");
+		}
+		return winner;
+}
+
+var updateScores = function() {
+	
+	
+};
+
 //Validates passed in string matches response expected.
-//Sort of protection since we use eval()
 var removeJsonP = function(response) {
 		var expectedStart = 'onMatchSchedule(';
 		var expectedEnd = ');';
