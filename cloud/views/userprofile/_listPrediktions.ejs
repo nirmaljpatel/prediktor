@@ -18,6 +18,11 @@
 						the HTTP method from post to delete for a truly RESTful interface. -->
 					<input type='hidden' name='_method' value='delete' />
 					<input type='submit' class="btn_submit" value="Delete" />
+				<% } else { %>
+					<div>
+						<span>Your score for this prediktion:</span>
+						<span><%= matchPred.get("score") %></span>
+					</div>
 				<% } %>
 			</form>
 		</div>
