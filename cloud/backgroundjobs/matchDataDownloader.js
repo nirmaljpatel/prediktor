@@ -39,7 +39,7 @@ Parse.Cloud.job("matchDataDownloader", function(request, status) {
 						points = 10;
 				}
 				prediktion.set("score", points);
-				promises.push( prediktion.save());
+				promises.push( prediktion.save(null, { useMasterKey: true }));
 			});
 			return Parse.Promise.when(promises);
 		});
