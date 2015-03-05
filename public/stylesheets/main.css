@@ -5,7 +5,8 @@
 	border-radius: 0.5em;
 }
 .teamsBox {
-	text-align: center;	
+	text-align: center;
+	margin-top: .25em;
 }
 .teamBox {
 	box-shadow: 0px 0px 5px gray;
