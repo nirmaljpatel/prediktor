@@ -11,8 +11,11 @@ exports.save = function (req, res) {
     console.log("Saving a Prediktion.");
     if (Parse.User.current()) {
         console.log("...We have a Parse user!!!");
-        // No need to fetch the current user for querying Note objects.
 		
+		console.log(req.body.winner);
+		if(req.body.winner === undefined) {
+			res.send(500, "Hello Prediktor... You forgot to select your team... Now go back.");
+		}
 		var prediktion = new Prediktion();
 	
 		var match = new Match();
