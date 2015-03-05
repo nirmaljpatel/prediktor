@@ -4,7 +4,8 @@
 <% include ../_headerBar %>
 
 <div class="main_content">
-	<div class="meBox"><%= user.get('name') %></div>
+	<span class="meBox">Hi <%= user.get('name') %>!!!</span>
+	<span>Your Prediktions:</span>
 	
 	<% include _listPrediktions.ejs%>
 </div>

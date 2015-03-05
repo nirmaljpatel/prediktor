@@ -1,0 +1,9 @@
+<div><%= match.get("description") %></div>
+<div><%= match.get("groupName") %></div>
+<!-- <div><%= formatTime(match.get("matchDate")) %></div> -->
+<div><%= (match.get("matchDate")) %></div>
+<div>
+	<%= match.get("venue")[0].fullName %>,&nbsp
+	<%= match.get("venue")[0].city %>,&nbsp
+	<%= match.get("venue")[0].country %>
+</div>

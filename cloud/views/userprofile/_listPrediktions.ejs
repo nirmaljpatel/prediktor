@@ -1,15 +1,10 @@
 
 <ul class="listview">
 <% prediktions.forEach(function(matchPred) { %>
-	<li>
+	<li class="matchPredBox">
 		<% var match = matchPred.get("match"); %>
-		
-		
-		<div><%= match.get("description") %></div>
-		<div><%= match.get("groupName") %></div>
-		<div><%= match.get("venue")[0].fullName %></div>
-		<div><%= formatTime(match.get("matchDate")) %></div>
-		<div class="teams">
+		<% include ../_matchDetails %>
+		<div class="teamsBox">
 			<% var teams = match.get("teams") %>
 			<form method='post' action="<%= '/matches/' + match.id + '/prediktions/' + matchPred.id%>">
 				<% teams.forEach(function(team) { %>

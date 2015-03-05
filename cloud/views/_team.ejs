@@ -1,5 +1,11 @@
-<% if(matchPred && matchPred.get("winner").id === team.objectId){ %>
-	<input type="radio" name="winner" value="<%= team.objectId %>" checked="true"><%= team.fullName %></input>
-<% }else{ %>
-	<input type="radio" name="winner" value="<%= team.objectId %>"><%= team.fullName %></input>
-<% } %>
+<div class="teamBox">
+	<span class="tLogo100x <%= team.abbrv %>"></span>
+	<% if(matchPred && matchPred.get("winner").id === team.objectId){ %>
+		<input type="radio" name="winner" id="<%= team.objectId %>_Id" value="<%= team.objectId %>" checked="true">
+	<% }else{ %>
+		<input type="radio" name="winner" id="<%= team.objectId %>_Id" value="<%= team.objectId %>">
+	<% } %>
+			
+			<label for="<%= team.objectId %>_Id"><%= team.fullName %></label>
+		</input>
+</div>

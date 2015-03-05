@@ -3,9 +3,17 @@
 <% include _headerBar %>
 
 <div class="main_content">
+	<% var link; %>
+	<% if(leaderboard === true) { %>
+		<% link = 'leaderboards'; %>
+		<h2>LeaderBoards:</h2>
+	<% } else { %>
+		<% link = 'seasons'; %>
+		<h2>Play Prediktor:</h2>
+	<% } %>
 	<% seasons.forEach(function(season) { %>
 		<ul class="season_link">
-			<li><a href="<%= '/seasons/' + season.id %>" ><%= season.get("name") %></a></li>
+			<li><a href="<%= '/' + link + '/' + season.id %>" ><%= season.get("name") %></a></li>
 		</ul>
 	<% }) %>
 </div>

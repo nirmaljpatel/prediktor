@@ -4,31 +4,25 @@
 <% include _headerBar %>
 
 <div class="main_content">
-	<div class="dateBox">Matches on <%= fordate %></div>
+	<div class="dateBox">Predikt for Matches on <%= fordate %></div>
 	<ul>
 		<% matches.forEach(function(match, counter) { %>
 			<li class="matchBox">
-				<div><%= match.get("description") %></div>
-				<div><%= match.get("groupName") %></div>
-				
-					<div><%= formatTime(match.get("matchDate")) %></div>
-					<div><%= (match.get("matchDate")) %></div>
-				
-				<div><%= match.get("venue")[0].fullName %></div>
-			
+			<% include _matchDetails %>
 			<% var matchPred = _.find(prediktions, function(pred){ %>
 				<% return pred?pred.get('match').id === match.id:false; %>
 			<% }); %>
-				<form method='post' action="<%= '/seasons/' + season.id +'/matches/' + match.id + '/prediktions' %>">
-					<div class="teams">
+				<div class="teamsBox">
+					<form method='post' action="<%= '/seasons/' + season.id +'/matches/' + match.id + '/prediktions' %>">
+					
 						<% var teams = match.get("teams") %>
 						<% teams.forEach(function(team) { %>
 							<% include _team %>
 						<% }) %>
-					</div>
-					<% if(!matchPred){ %>
-						<input type='submit' class="btn_submit" value="Predikt" />
-					<% } %>
+						<% if(!matchPred){ %>
+							<input type='submit' class="btn_submit" value="Predikt" />
+						<% } %>
+				</div>
 				</form>
 			</li>
 		<% }) %>

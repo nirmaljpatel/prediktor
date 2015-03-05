@@ -1,9 +1,8 @@
-
 var Season = Parse.Object.extend("season");
+var Prediktion = Parse.Object.extend("prediktion");
 
-//Lists all Seasons
-exports.list = function (req, res) {
-    console.log("Routing for /");
+exports.listSeasons = function(req, res) {
+	console.log("Routing for /");
     if (Parse.User.current()) {
         console.log("...We have a Parse user!!!");
         // No need to fetch the current user for querying Note objects.
@@ -13,7 +12,7 @@ exports.list = function (req, res) {
             console.log(results);
             res.render('homepage.ejs', {
                 seasons : results,
-				leaderboard : false
+				leaderboard : true
             });
         },
             function (error) {
@@ -25,4 +24,8 @@ exports.list = function (req, res) {
         // Render a public welcome page, with a link to the '/login' endpoint.
         res.render('defaultPage.ejs');
     }
+};
+
+exports.seasonLeaderBoard = function(req, res) {
+		res.render('comingsoon.ejs');
 };

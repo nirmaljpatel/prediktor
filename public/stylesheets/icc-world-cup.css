@@ -1,0 +1,325 @@
+/* 
+ * ICC WC 2015 Logo
+ */
+.iccGlobalSprite {
+  background-image: url('../res-icc/img/17/sprites/icc-global-sprite.png');
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
+  .iccGlobalSprite {
+    background-image: url('../res-icc/img/17/sprites/icc-global-sprite@x2.png');
+    background-size: 750px 750px;
+  }
+}
+
+header.topNav div.masthead h1 a {
+  width: 229px;
+  height: 85px;
+  background-image: url('../res-icc/img/17/sprites/icc-global-sprite.png');
+  background-position: 0 -327px;
+  margin: 20px 0 0 0;
+  background-color: transparent;
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
+  header.topNav div.masthead h1 a {
+    background-image: url('../res-icc/img/17/sprites/icc-global-sprite@x2.png');
+    background-size: 750px 750px;
+  }
+}
+/* 
+* ICC WC 2015 Logo
+*/
+
+/* CWC Team Logos */
+.tLogo100x {
+  background-image: url('../res-icc/img/17/team-logos/cwc/cwc-team-logos-100x.png') !important;
+  width: 100px;
+  height: 75px;
+  display: inline-block;
+  background-size: auto;
+  background-position: 0 0;
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
+  .tLogo100x {
+    background-image: url('../res-icc/img/17/team-logos/cwc/cwc-team-logos-100x@x2.png') !important;
+    background-size: 100px 1575px;
+  }
+}
+.tLogo100x.AFG {
+  background-position: 0 -75px;
+}
+.tLogo100x.AUS {
+  background-position: 0 -150px;
+}
+.tLogo100x.BAN {
+  background-position: 0 -225px;
+}
+.tLogo100x.ENG {
+  background-position: 0 -300px;
+}
+.tLogo100x.IND {
+  background-position: 0 -375px;
+}
+.tLogo100x.IRE {
+  background-position: 0 -450px;
+}
+.tLogo100x.NZ {
+  background-position: 0 -525px;
+}
+.tLogo100x.PAK {
+  background-position: 0 -600px;
+}
+.tLogo100x.SCO {
+  background-position: 0 -675px;
+}
+.tLogo100x.SA {
+  background-position: 0 -750px;
+}
+.tLogo100x.SL {
+  background-position: 0 -825px;
+}
+.tLogo100x.UAE {
+  background-position: 0 -900px;
+}
+.tLogo100x.WI {
+  background-position: 0 -975px;
+}
+.tLogo100x.ZIM {
+  background-position: 0 -1050px;
+}
+.tLogo100x.BRM {
+  background-position: 0 -1125px;
+}
+.tLogo100x.CAN {
+  background-position: 0 -1200px;
+}
+.tLogo100x.EAF {
+  background-position: 0 -1275px;
+}
+.tLogo100x.KEN {
+  background-position: 0 -1350px;
+}
+.tLogo100x.NAM {
+  background-position: 0 -1425px;
+}
+.tLogo100x.NL {
+  background-position: 0 -1500px;
+}
+.tLogo60x {
+  background-image: url('../res-icc/img/17/team-logos/cwc/cwc-team-logos-60x.png');
+  width: 60px;
+  height: 45px;
+  display: block;
+  background-position: 0 0;
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
+  .tLogo60x {
+    background-image: url('../res-icc/img/17/team-logos/cwc/cwc-team-logos-60x@x2.png');
+    background-size: 60px 945px;
+  }
+}
+.tLogo60x.AFG {
+  background-position: 0 -45px;
+}
+.tLogo60x.AUS {
+  background-position: 0 -90px;
+}
+.tLogo60x.BAN {
+  background-position: 0 -135px;
+}
+.tLogo60x.ENG {
+  background-position: 0 -180px;
+}
+.tLogo60x.IND {
+  background-position: 0 -225px;
+}
+.tLogo60x.IRE {
+  background-position: 0 -270px;
+}
+.tLogo60x.NZ {
+  background-position: 0 -315px;
+}
+.tLogo60x.PAK {
+  background-position: 0 -360px;
+}
+.tLogo60x.SCO {
+  background-position: 0 -405px;
+}
+.tLogo60x.SA {
+  background-position: 0 -450px;
+}
+.tLogo60x.SL {
+  background-position: 0 -495px;
+}
+.tLogo60x.UAE {
+  background-position: 0 -540px;
+}
+.tLogo60x.WI {
+  background-position: 0 -585px;
+}
+.tLogo60x.ZIM {
+  background-position: 0 -630px;
+}
+.tLogo60x.BRM {
+  background-position: 0 -675px;
+}
+.tLogo60x.CAN {
+  background-position: 0 -720px;
+}
+.tLogo60x.EAF {
+  background-position: 0 -765px;
+}
+.tLogo60x.KEN {
+  background-position: 0 -809px;
+}
+.tLogo60x.NAM {
+  background-position: 0 -855px;
+}
+.tLogo60x.NL {
+  background-position: 0 -900px;
+}
+.tLogo40x {
+  background-image: url('../res-icc/img/17/team-logos/cwc/cwc-team-logos-40x.png');
+  width: 40px;
+  height: 30px;
+  display: block;
+  background-position: 0 0;
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
+  .tLogo40x {
+    background-image: url('../res-icc/img/17/team-logos/cwc/cwc-team-logos-40x@x2.png');
+    background-size: 40px 630px;
+  }
+}
+.tLogo40x.AFG {
+  background-position: 0 -30px;
+}
+.tLogo40x.AUS {
+  background-position: 0 -60px;
+}
+.tLogo40x.BAN {
+  background-position: 0 -90px;
+}
+.tLogo40x.ENG {
+  background-position: 0 -120px;
+}
+.tLogo40x.IND {
+  background-position: 0 -150px;
+}
+.tLogo40x.IRE {
+  background-position: 0 -180px;
+}
+.tLogo40x.NZ {
+  background-position: 0 -210px;
+}
+.tLogo40x.PAK {
+  background-position: 0 -240px;
+}
+.tLogo40x.SCO {
+  background-position: 0 -270px;
+}
+.tLogo40x.SA {
+  background-position: 0 -300px;
+}
+.tLogo40x.SL {
+  background-position: 0 -330px;
+}
+.tLogo40x.UAE {
+  background-position: 0 -360px;
+}
+.tLogo40x.WI {
+  background-position: 0 -390px;
+}
+.tLogo40x.ZIM {
+  background-position: 0 -420px;
+}
+.tLogo40x.BRM {
+  background-position: 0 -450px;
+}
+.tLogo40x.CAN {
+  background-position: 0 -480px;
+}
+.tLogo40x.EAF {
+  background-position: 0 -510px;
+}
+.tLogo40x.KEN {
+  background-position: 0 -539px;
+}
+.tLogo40x.NAM {
+  background-position: 0 -570px;
+}
+.tLogo40x.NL {
+  background-position: 0 -600px;
+}
+.tLogo20x {
+  background-image: url('../res-icc/img/17/team-logos/cwc/cwc-team-logos-20x.png');
+  width: 20px;
+  height: 15px;
+  display: block;
+  background-position: 0 0;
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
+  .tLogo20x {
+    background-image: url('../res-icc/img/17/team-logos/cwc/cwc-team-logos-20x@x2.png');
+    background-size: 20px 315px;
+  }
+}
+.tLogo20x.AFG {
+  background-position: 0 -15px;
+}
+.tLogo20x.AUS {
+  background-position: 0 -30px;
+}
+.tLogo20x.BAN {
+  background-position: 0 -45px;
+}
+.tLogo20x.ENG {
+  background-position: 0 -60px;
+}
+.tLogo20x.IND {
+  background-position: 0 -75px;
+}
+.tLogo20x.IRE {
+  background-position: 0 -90px;
+}
+.tLogo20x.NZ {
+  background-position: 0 -105px;
+}
+.tLogo20x.PAK {
+  background-position: 0 -120px;
+}
+.tLogo20x.SCO {
+  background-position: 0 -135px;
+}
+.tLogo20x.SA {
+  background-position: 0 -150px;
+}
+.tLogo20x.SL {
+  background-position: 0 -165px;
+}
+.tLogo20x.UAE {
+  background-position: 0 -180px;
+}
+.tLogo20x.WI {
+  background-position: 0 -195px;
+}
+.tLogo20x.ZIM {
+  background-position: 0 -210px;
+}
+.tLogo20x.BRM {
+  background-position: 0 -225px;
+}
+.tLogo20x.CAN {
+  background-position: 0 -240px;
+}
+.tLogo20x.EAF {
+  background-position: 0 -255px;
+}
+.tLogo20x.KEN {
+  background-position: 0 -269px;
+}
+.tLogo20x.NAM {
+  background-position: 0 -285px;
+}
+.tLogo20x.NL {
+  background-position: 0 -300px;
+}

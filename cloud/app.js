@@ -10,6 +10,8 @@ var seasonCtrlr = require('cloud/controllers/season.js');
 var matchCtrlr = require('cloud/controllers/match.js');
 var prediktCtrlr = require('cloud/controllers/predikt.js');
 var userCtrlr = require('cloud/controllers/user.js');
+var lbCtrlr = require('cloud/controllers/leaderboard.js');
+
 
 
 var parseExpressHttpsRedirect = require('parse-express-https-redirect');
@@ -68,6 +70,9 @@ app.post('/seasons/:seasonId/matches/:matchId/prediktions', prediktCtrlr.save);
 app.del('/matches/:matchId/prediktions/:predId', prediktCtrlr.delete);
 
 app.get('/user', userCtrlr.list);
+
+app.get('/leaderboards', lbCtrlr.listSeasons);
+app.get('/leaderboards/:seasonId', lbCtrlr.seasonLeaderBoard);
 
 
 //Test code
