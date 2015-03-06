@@ -1,0 +1,30 @@
+/* 
+ * Add styles for Seasons Logos here
+ */
+.season_links li {
+	margin: .25em;
+}
+.season_links li a{
+	display: flex;
+	align-items: center;
+}
+.seasonLogo {
+	border: 2px solid #c7b89e;
+	min-width: 100px;
+	min-height: 100px;
+	border-radius: 50px;
+	display: inline-block;
+	background-repeat: no-repeat;
+	
+	margin: 0 .5em;
+}
+.seasonLogo.icon868 {
+	background-image: url('../seasons/868.png');
+	background-size: 75px;
+	background-position: 8px;
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
+  .seasonLogo {
+    
+  }
+}

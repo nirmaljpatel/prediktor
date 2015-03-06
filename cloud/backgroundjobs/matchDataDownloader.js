@@ -23,7 +23,7 @@ Parse.Cloud.job("matchDataDownloader", function(request, status) {
 		var yesterday = moment().subtract('days', 1);
 		console.log(yesterday);
 		var matchQuery = new Parse.Query(Match);
-		matchQuery.startsWith('matchDate', util.getDateAsStringAsStoredInParse(yesterday));
+		//matchQuery.startsWith('matchDate', util.getDateAsStringAsStoredInParse(yesterday));
 		
 		var prediktionQuery = new Parse.Query(Prediktion);
 		prediktionQuery.matchesKeyInQuery("match", "objectId", matchQuery);

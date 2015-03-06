@@ -9,13 +9,18 @@
 		<h2>LeaderBoards:</h2>
 	<% } else { %>
 		<% link = 'seasons'; %>
-		<h2>Play Prediktor:</h2>
+		<h2>Play:</h2>
 	<% } %>
-	<% seasons.forEach(function(season) { %>
-		<ul class="season_link">
-			<li><a href="<%= '/' + link + '/' + season.id %>" ><%= season.get("name") %></a></li>
-		</ul>
-	<% }) %>
+	<ul class="season_links">
+		<% seasons.forEach(function(season) { %>
+			<li>
+				<a href="<%= '/' + link + '/' + season.id %>" >
+					<div class="seasonLogo icon<%= season.get("icc_id") %>"></div>
+					<span><%= season.get("name") %></span>
+				</a>
+			</li>
+		<% }) %>
+	</ul>
 </div>
 
 <!-- Include the footer partial -->
