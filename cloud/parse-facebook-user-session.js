@@ -119,7 +119,7 @@ var parseFacebookUserSession = function (params) {
             accessToken = data.access_token;
             expires = data.expires;
 
-            var url = 'https://graph.facebook.com/me?';
+            var url = 'https://graph.facebook.com/me?&fields=id,name,picture.type(normal)&';
             url = url + querystring.stringify({
                     access_token : accessToken
                 });
@@ -146,7 +146,9 @@ var parseFacebookUserSession = function (params) {
 
         }).then(function (user) {
             maybeLog("Saving Facebook data for user...");
+			maybeLog("...Pic:"+facebookData.picture.data.url);
             user.set("name", facebookData.name);
+			user.set("pic", facebookData.picture.data.url);
             return user.save();
 
         }).then(function (user) {

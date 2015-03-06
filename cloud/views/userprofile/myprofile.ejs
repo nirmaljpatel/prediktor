@@ -2,7 +2,11 @@
 <% scripts.push('underscore-min.js') %>
 <% include ../_header %>
 <% include ../_headerBar %>
-
+<div class="userPic">
+	<a href="/user">
+		<img src="<%=user.get("pic") %>">
+	</a>
+</div>
 <div class="main_content">
 	<span class="meBox">Hi <%= user.get('name') %>!!!</span>
 	<a href="/logout"><span>Logout</span></a>

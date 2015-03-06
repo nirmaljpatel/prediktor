@@ -47,6 +47,26 @@ input[type="submit"]{
 	text-decoration: none;
 }
 
+.userPic {
+	border: 2px solid #c7b89e;
+	min-width: 100px;
+	min-height: 100px;
+	border-radius: 50px;
+	display: inline-block;
+	background-repeat: no-repeat;
+	overflow: hidden;
+	
+	position: relative;	/* Trick to make child IMG fill parend DIV*/
+}
+.userPic img{
+	width: 100px;
+	height: 100px;
+	
+	position: absolute;	/* Trick to make child IMG fill parend DIV*/
+	top: 0;	/* Trick to make child IMG fill parend DIV*/
+	right: 0;	/* Trick to make child IMG fill parend DIV*/
+}
+
 /* Start icc-world-cup.css overrides*/
 .tLogo100x {
 	box-shadow: 0px 0px 5px gray;
