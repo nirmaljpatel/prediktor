@@ -99,7 +99,8 @@ var parseFacebookUserSession = function (params) {
                 client_id : params.clientId,
                 redirect_uri : getAbsoluteRedirectUri(req),
                 client_secret : params.appSecret,
-                code : req.query.code
+                code : req.query.code,
+				scope: "email"
             });
 
         var accessToken = null;
@@ -119,7 +120,7 @@ var parseFacebookUserSession = function (params) {
             accessToken = data.access_token;
             expires = data.expires;
 
-            var url = 'https://graph.facebook.com/me?&fields=id,name,picture.type(normal)&';
+            var url = 'https://graph.facebook.com/me?&fields=id,name,picture.type(normal),email&';
             url = url + querystring.stringify({
                     access_token : accessToken
                 });
@@ -146,9 +147,9 @@ var parseFacebookUserSession = function (params) {
 
         }).then(function (user) {
             maybeLog("Saving Facebook data for user...");
-			maybeLog("...Pic:"+facebookData.picture.data.url);
             user.set("name", facebookData.name);
 			user.set("pic", facebookData.picture.data.url);
+			user.set("email", facebookData.email);
             return user.save();
 
         }).then(function (user) {
