@@ -1,16 +1,16 @@
 <!-- Include the header partial -->
 <% include ../_header %>
-<% include ../_headerBar %>
+
+<% var link; %>
+<% if(leaderboard === true) { %>
+	<% link = 'leaderboards'; %>
+	<% include ../leaderboard/_fancyHeader %>
+<% } else { %>
+	<% link = 'seasons'; %>
+	<% include _fancyHeader %>
+<% } %>
 
 <div class="main_content">
-	<% var link; %>
-	<% if(leaderboard === true) { %>
-		<% link = 'leaderboards'; %>
-		<h2>LeaderBoards</h2>
-	<% } else { %>
-		<% link = 'seasons'; %>
-		<h2>Play</h2>
-	<% } %>
 	<ul class="season_links">
 		<% seasons.forEach(function(season) { %>
 			<li>

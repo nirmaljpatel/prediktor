@@ -69,6 +69,10 @@ input[type="submit"]{
 	border-radius: 50px;
 	box-shadow: 0 0 11pt 2pt red;
 }
+.main.hdrOption .label {
+	line-height: 92px;
+	font-size: xx-large;
+}
 .sub.hdrOption {
 	min-width: 76px;
 	width: 76px;
