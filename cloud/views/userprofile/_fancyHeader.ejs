@@ -1,0 +1,16 @@
+<div class="hdr">
+	<div class="optionRow">
+		<a href="/" class="sub hdrOption left">
+			<span class="label">Play</span>
+		</a>
+		<a href="/user" class="main hdrOption userPic">
+			<img src="<%=user.get("pic") %>">
+		</a>
+		<a href="/logout" class="sub hdrOption right">
+			<span class="label">Logout</span>
+		</a>
+	</div>
+	<div class="dataRow">
+		<span><%= user.get('name') %></span>
+	</div>
+</div>

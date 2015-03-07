@@ -1,16 +1,12 @@
 <!-- Include the header partial -->
 <% scripts.push('underscore-min.js') %>
 <% include ../_header %>
-<% include ../_headerBar %>
-<div class="userPic">
-	<a href="/user">
-		<img src="<%=user.get("pic") %>">
-	</a>
-</div>
+
+<% include _fancyHeader %>
+
+
 <div class="main_content">
-	<span class="meBox">Hi <%= user.get('name') %>!!!</span>
-	<a href="/logout"><span>Logout</span></a>
-	<span>Your Prediktions:</span>
+	<span>Your Prediktions</span>
 	
 	<% include _listPrediktions.ejs%>
 </div>

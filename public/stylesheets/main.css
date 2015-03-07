@@ -47,14 +47,52 @@ input[type="submit"]{
 	text-decoration: none;
 }
 
-.userPic {
+/* Styles for fancyHeader */ 
+.hdr {
+	padding: 1em;
+}
+.optionRow {
+	display: flex;
+	align-items: center;
+}
+.hdrOption {
 	border: 2px solid #c7b89e;
-	min-width: 100px;
-	min-height: 100px;
-	border-radius: 50px;
 	display: inline-block;
 	background-repeat: no-repeat;
 	overflow: hidden;
+}
+.main.hdrOption {
+	min-width: 100px;
+	width: 100px;
+	min-height: 100px;
+	height: 100px;
+	border-radius: 50px;
+	box-shadow: 0 0 11pt 2pt red;
+}
+.sub.hdrOption {
+	min-width: 76px;
+	width: 76px;
+	min-height: 76px;
+	height: 76px;
+	border-radius: 38px;
+}
+.sub.hdrOption.left{
+	margin-right:auto; /* Pin flex item to left */
+}
+.sub.hdrOption.right{
+	margin-left:auto;/* Pin flex item to right */
+}
+.sub.hdrOption .label {
+	line-height: 68px; 
+}
+.dataRow {
+	margin-top: 0.5em;
+}
+
+/* End Styles for fancyHeader */ 
+
+
+.userPic {
 	
 	position: relative;	/* Trick to make child IMG fill parend DIV*/
 }
