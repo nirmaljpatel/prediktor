@@ -17,6 +17,9 @@ body {
 }
 
 /* App Styles Start */
+.bodyContainer{
+}
+
 .matchBox, .matchPredBox {
 	border: thin solid black;
 	margin: 0.25em;
