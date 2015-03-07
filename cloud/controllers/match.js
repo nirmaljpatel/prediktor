@@ -38,9 +38,14 @@ exports.list = function (req, res) {
 		
 		//matchQuery.matchesQuery( "prediktions", usersPrediktionsQuery);
 
+		console.log(season);
+		
 		var promises = [];
 		var todaysMatches;
-        matchQuery.find().then(function (poMatches) {
+		season.fetch().then(function(){
+			console.log(season);
+			return matchQuery.find();
+		}).then(function (poMatches) {
 				todaysMatches = poMatches;
 				_.each(poMatches, function(match){
 					var usersPrediktionsQuery = new Parse.Query(Prediktion);
