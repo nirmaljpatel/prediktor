@@ -10,7 +10,13 @@ html {
 *, *:before, *:after {
   box-sizing: inherit;
 }
+body {
+	max-width: 480px;
+	margin-left: auto;
+	margin-right: auto;
+}
 
+/* App Styles Start */
 .matchBox, .matchPredBox {
 	border: thin solid black;
 	margin: 0.25em;
@@ -126,6 +132,10 @@ ol, ul, li{
     vertical-align:baseline;
     background:transparent;
 }
+ul {
+    list-style:none;
+}
+
 input, select {
     vertical-align:middle;
 }
