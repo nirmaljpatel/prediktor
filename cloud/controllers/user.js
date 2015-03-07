@@ -13,7 +13,7 @@ exports.list = function(req, res) {
 			
 			return usersPrediktionsQuery.find();
 		}).then(function(usersPrediktions){
-			res.render('userprofile/myprofile.ejs', {
+			res.render('me/myprofile.ejs', {
 				user: userData,
 				prediktions: usersPrediktions
 			});
@@ -21,6 +21,6 @@ exports.list = function(req, res) {
 	} else {
         console.log("...We dont have a Parse user!!!");
         // Render a public welcome page, with a link to the '/login' endpoint.
-        res.render('defaultPage.ejs');
+        res.render('defaultPage.ejs'); 
     }
 };

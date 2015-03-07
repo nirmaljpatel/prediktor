@@ -55,7 +55,7 @@ exports.list = function (req, res) {
 				var usersPrediktions = Array.prototype.slice.call(arguments);
 				//console.log(todaysMatches);
 				console.log(usersPrediktions);
-				res.render('matches.ejs', {
+				res.render('play/matches.ejs', {
 					fordate: tomorrow.format("MMM Do YYYY"),
 					matches : todaysMatches,
 					season: season,

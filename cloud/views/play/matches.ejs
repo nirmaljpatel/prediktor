@@ -1,7 +1,7 @@
 <!-- Include the header partial -->
 <% scripts.push('underscore-min.js') %>
-<% include _header %>
-<% include _headerBar %>
+<% include ../_header %>
+<% include ../_headerBar %>
 
 <div class="main_content">
 	<div class="seasonBox">
@@ -10,7 +10,7 @@
 	<ul>
 		<% matches.forEach(function(match, counter) { %>
 			<li class="matchBox">
-			<% include _matchDetails %>
+			<% include ../_matchDetails %>
 			<% var matchPred = _.find(prediktions, function(pred){ %>
 				<% return pred?pred.get('match').id === match.id:false; %>
 			<% }); %>
@@ -19,7 +19,7 @@
 					
 						<% var teams = match.get("teams") %>
 						<% teams.forEach(function(team) { %>
-							<% include _team %>
+							<% include ../_team %>
 						<% }) %>
 						<% if(!matchPred){ %>
 							<input type='submit' class="btn_submit" value="Predikt" />
@@ -32,4 +32,4 @@
 </div>
     
 <!-- Include the footer partial -->
-<% include _footer %>
+<% include ../_footer %>

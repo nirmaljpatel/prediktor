@@ -10,7 +10,7 @@ exports.listSeasons = function(req, res) {
         var query = new Parse.Query(Season);
         query.find().then(function (results) {
             console.log(results);
-            res.render('_listSeasons.ejs', {
+            res.render('play/_listSeasons.ejs', {
                 seasons : results,
 				leaderboard : true
             });
