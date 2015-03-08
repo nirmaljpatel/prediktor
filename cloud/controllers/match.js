@@ -21,12 +21,16 @@ exports.list = function (req, res) {
         season.id = req.params.seasonId;
         matchQuery.equalTo("season", season);
         
-		var tomorrow = moment().add('days', 1);
+		var matchesForDay = moment().add('days', 1); //Default tomorrow
+		if(req.query.day) {
+				console.log("Got day in querystring");
+				matchesForDay = moment(req.query.day, "YYYYMMDD");
+		} else {
+				console.log(req.query);
+		}
+		console.log("Finding matches for:" + util.getDateAsStringAsStoredInParse(matchesForDay));
 		
-		console.log(tomorrow);
-		
-
-		matchQuery.startsWith('matchDate', util.getDateAsStringAsStoredInParse(tomorrow));
+		matchQuery.startsWith('matchDate', util.getDateAsStringAsStoredInParse(matchesForDay));
 		matchQuery.include("playingTeams");
 		matchQuery.include("venue");
 		//matchQuery.include("prediktions");
@@ -61,7 +65,7 @@ exports.list = function (req, res) {
 				//console.log(todaysMatches);
 				console.log(usersPrediktions);
 				res.render('play/matches.ejs', {
-					fordate: tomorrow.format("MMM Do YYYY"),
+					fordate: matchesForDay,
 					matches : todaysMatches,
 					season: season,
 					prediktions: usersPrediktions

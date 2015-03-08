@@ -1,3 +1,4 @@
+var querystring = require('querystring');
 
 var Season = Parse.Object.extend("season");
 
@@ -11,15 +12,15 @@ exports.list = function (req, res) {
         var query = new Parse.Query(Season);
         query.find().then(function (results) {
 			/* If only one season, go directly to its details */
+			/*
 			if(results.length === 1) {
 				var season = results[0];
-				res.redirect("/seasons/" + season.id);
-			} else {
-				res.render('play/_listSeasons.ejs', {
-					seasons : results,
-					leaderboard : false
-				});
-			}
+				res.redirect("/seasons/" + season.id + "/?" + querystring.stringify(req.query));
+			}*/
+			res.render('play/_listSeasons.ejs', {
+				seasons : results,
+				leaderboard : false
+			});
         },
             function (error) {
             // Render error page.

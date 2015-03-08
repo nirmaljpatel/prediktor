@@ -13,12 +13,11 @@ exports.listSeasons = function(req, res) {
 			if(results.length === 1) {
 				var season = results[0];
 				res.redirect("/leaderboards/" + season.id);
-			} else {
-				res.render('play/_listSeasons.ejs', {
-					seasons : results,
-					leaderboard : true
-				});
 			}
+			res.render('play/_listSeasons.ejs', {
+				seasons : results,
+				leaderboard : true
+			});
         },
             function (error) {
             // Render error page.

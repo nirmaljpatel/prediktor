@@ -1,12 +1,12 @@
 <div class="hdr">
 	<div class="optionRow">
-		<a href="/user" class="sub hdrOption left">
-			<span class="label">Me</span>
+		<a href="?day=<%= dayBefore(fordate) %>" class="sub hdrOption left">
+			<span class="label">Prev</span>
 		</a>
 		<a href="/" class="main hdrOption seasonLogo icon<%= season.get("icc_id") %>">
 		</a>
-		<a href="/leaderboards" class="sub hdrOption right">
-			<span class="label">Scores</span>
+		<a href="?day=<%= dayAfter(fordate) %>" class="sub hdrOption right">
+			<span class="label">Next</span>
 		</a>
 	</div>
 	<div class="dataRow">

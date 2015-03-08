@@ -62,8 +62,21 @@ app.locals.addScripts=function (all) {
 app.locals.getScripts = function(req, res) {
     return scripts;
 };
+app.locals.formatDate = function(date){
+		return moment(date).format("MMM Do YYYY");
+};
+app.locals.dayAfter = function(date) {
+		return moment(date).add('days', 1).format("YYYYMMDD");
+};
+app.locals.dayBefore = function(date) {
+		return moment(date).subtract('days', 1).format("YYYYMMDD");
+};
 
 // The homepage renders differently depending on whether user is logged in.
+app.get('/', function(req, res, next){
+		console.log("Handler: "+req.query.day);
+		next();
+});
 app.get('/', seasonCtrlr.list);
 app.get('/seasons/:seasonId', matchCtrlr.list);
 app.post('/seasons/:seasonId/matches/:matchId/prediktions', prediktCtrlr.save);
