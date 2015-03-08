@@ -1,4 +1,7 @@
 var moment = require('moment');
+var apiKeys = require('cloud/apiKeys.js');
+var Mandrill = require('mandrill');
+Mandrill.initialize(apiKeys.mandrill);
 
 var Prediktion = Parse.Object.extend("prediktion");
 
@@ -64,6 +67,62 @@ Parse.Cloud.beforeDelete("prediktion", function(request, response){
 		response.error("101: Error when trying to deleting prediktion." + error.message);
 	});
 });
+
+Parse.Cloud.afterSave("prediktion", function(request, response) {
+	console.log("After saving a Prediktion");
+	Mandrill.sendEmail({
+		message: {
+			text: JSON.stringify(request.object, null, 2),
+			subject: "A Prediktion was saved by "+ Parse.User.current().get("name"),
+			from_email: "nirmaljpatel@gmail.com",
+			from_name: "Prediktor App Admin",
+			to: [
+			{
+				email: "nirmaljpatel@gmail.com",
+				name: "Your Name"
+			}
+			]
+		},
+		async: true
+		},{
+		success: function(httpResponse) {
+			console.log(httpResponse);
+			response.success("Email sent!");
+		},
+		error: function(httpResponse) {
+			console.error(httpResponse);
+			response.error("Uh oh, something went wrong");
+		}
+	});
+});
+Parse.Cloud.afterDelete("prediktion", function(request, response) {
+	console.log("After deleting a Prediktion");
+	Mandrill.sendEmail({
+		message: {
+			text: JSON.stringify(request.object, null, 2),
+			subject: "A Prediktion was deleted by "+ Parse.User.current().get("name"),
+			from_email: "nirmaljpatel@gmail.com",
+			from_name: "Prediktor App Admin",
+			to: [
+			{
+				email: "nirmaljpatel@gmail.com",
+				name: "Your Name"
+			}
+			]
+		},
+		async: true
+		},{
+		success: function(httpResponse) {
+			console.log(httpResponse);
+			response.success("Email sent!");
+		},
+		error: function(httpResponse) {
+			console.error(httpResponse);
+			response.error("Uh oh, something went wrong");
+		}
+	});
+});
+
 
 var hasMatchStarted = function(match) {
 		var now = moment();
