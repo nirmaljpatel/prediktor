@@ -16,11 +16,12 @@ exports.list = function (req, res) {
 			if(results.length === 1) {
 				var season = results[0];
 				res.redirect("/seasons/" + season.id + "/?" + querystring.stringify(req.query));
-			}*/
-			res.render('play/_listSeasons.ejs', {
-				seasons : results,
-				leaderboard : false
-			});
+			} else { */
+				res.render('play/_listSeasons.ejs', {
+					seasons : results,
+					leaderboard : false
+				});
+			/* } */
         },
             function (error) {
             // Render error page.
