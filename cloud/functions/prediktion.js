@@ -50,15 +50,18 @@ Parse.Cloud.beforeDelete("prediktion", function(request, response){
 		var matchState = match.get("matchState");
 		
 		if ( matchState === "C") {
+			console.log("111: Cannot delete prediktion for a Completed match.");
 			response.error("111: Cannot delete prediktion for a Completed match.");
 		} else if(hasMatchStarted(match)) {
+			console.log("104: Cannot delete prediktion for a match after its start time.");
 			response.error("104: Cannot delete prediktion for a match after its start time.");
+		} else {
+			response.success();
 		}
-		response.success();
 	},
 	function(error){
 		console.log(error);
-		response.error("101: Error when trying to deleting prediktion.");
+		response.error("101: Error when trying to deleting prediktion." + error.message);
 	});
 });
 
@@ -70,8 +73,8 @@ var hasMatchStarted = function(match) {
 		var matchMoment = moment(matchDate);
 		
 		now.zone(matchDate);
-		console.log(now.format());
 		console.log(matchMoment.format());
+		console.log(now > matchMoment);
 		
 		
 		return now > matchMoment;

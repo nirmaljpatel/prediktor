@@ -7,26 +7,64 @@
 <div class="main_content">
 	<div class="seasonBox">
 	</div>
-	<div class="dateBox">Predikt for Matches on <%= formatDate(fordate) %></div>
+	<div class="dateBox">
+		<span>Predikt for Matches on </span>
+		<div><%= formatDate(fordate) %></div>
+	</div>
 	<ul>
 		<% matches.forEach(function(match, counter) { %>
 			<li class="matchBox">
-			<% include ../_matchDetails %>
-			<% var matchPred = _.find(prediktions, function(pred){ %>
-				<% return pred?pred.get('match').id === match.id:false; %>
-			<% }); %>
+				<% include ../_matchDetails %>
+				<% var matchPred = _.find(prediktions, function(pred){ %>
+					<% return pred?pred.get('match').id === match.id:false; %>
+				<% }); %>
 				<div class="teamsBox">
-					<form method='post' action="<%= '/seasons/' + season.id +'/matches/' + match.id + '/prediktions' %>">
-					
+					<% if(match.get("matchState") === "U"){ %>
+						<% if(!matchPred){ %>
+							<form method='post' action="<%= '/seasons/' + season.id +'/matches/' + match.id + '/prediktions' %>">
+						<% } else { %>
+							<form method='post' action="<%= '/matches/' + match.id + '/prediktions/' + matchPred.id%>">
+						<% } %>
 						<% var teams = match.get("teams") %>
 						<% teams.forEach(function(team) { %>
 							<% include ../_team %>
 						<% }) %>
 						<% if(!matchPred){ %>
 							<input type='submit' class="btn_submit" value="Predikt" />
+						<% } else { %>
+							<!-- This hidden element causes express.methodOverride middleware to override
+								the HTTP method from post to delete for a truly RESTful interface. -->
+							<input type='hidden' name='_method' value='delete' />
+							<input type='submit' class="btn_submit" value="Un-Predikt" />
 						<% } %>
+						</form>
+					<% } else if(match.get("matchState") === "C"){ %>
+						<% var teams = match.get("teams") %>
+						<% teams.forEach(function(team) { %>
+							<% include ../_team %>
+						<% }) %>
+						<% var matchStatus = match.get("matchStatus"); %>
+						<div>
+							<span>Match Result:</span>
+							<span><%= matchStatus.text %></span>
+						</div>
+						<div>
+							<span>Your score:</span>
+							<% if(!matchPred){ %>
+								<span>0</span>
+								<div>You did not make a Prediktion.</div>
+							<% } else { %>
+								<span><%= matchPred.get("score") %></span>
+							<% } %>
+						</div>
+					<% } else { %>
+						<% var teams = match.get("teams") %>
+						<% teams.forEach(function(team) { %>
+							<% include ../_team %>
+						<% }) %>
+					<% } %>
+					
 				</div>
-				</form>
 			</li>
 		<% }) %>
 	</ul>

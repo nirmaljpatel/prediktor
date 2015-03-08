@@ -36,7 +36,9 @@ exports.save = function (req, res) {
 				return match.save();
 		}).then(function(savedMatch){
 			console.log(savedMatch);
-			res.redirect('/seasons/' + req.params.seasonId);
+			backURL=req.header('Referer') || '/seasons/' + req.params.seasonId;
+			res.redirect(backURL);
+			//res.redirect('/seasons/' + req.params.seasonId);
 		}, function(error){
 			console.log(error);
 			res.send(500, 'Failed saving prediktion:'+ error.message);
@@ -59,11 +61,13 @@ exports.delete = function (req, res) {
 		prediktion.destroy({
 			success: function(myObject) {
 				// The object was deleted from the Parse Cloud.
-				res.redirect('/user');
+				//res.redirect('/user');
+				backURL=req.header('Referer') || '/seasons/' + req.params.seasonId;
+				res.redirect(backURL);
 			},
 			error: function(myObject, error) {
 				console.log(error);
-				res.send(500, 'Failed to delete prediktion.');
+				res.send(500, 'Failed to delete prediktion: ' +error.message);
 			}
 		});
 		
