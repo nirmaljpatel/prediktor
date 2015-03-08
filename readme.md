@@ -1,4 +1,6 @@
 
+A Parse hosted App to play predictions for the Cricket World Cup 2015.
+
 [Prediktor App](https://prediktor.parseapp.com)
 
 Feature List
