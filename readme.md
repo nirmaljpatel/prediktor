@@ -4,22 +4,22 @@ Feature List
 
     [x]  Login with Facebook
 
-    []  Create Parse user based on Facebook data
+    [x]  Create Parse user based on Facebook data
     
     
-[]  Prediction
+[x]  Prediction
 
-    [] Show list of todays matches
+    [x] Show list of todays matches
 
-    []  UX to predict a match result
+    [x]  UX to predict a match result
 
-    [] Save prediction to Parse
+    [x] Save prediction to Parse
 
     [] Indicate current trend on predictions
 
-[] Score calculation
+[x] Score calculation
 
-    [] Award points based on predictions vs results
+    [x] Award points based on predictions vs results
 
 []  Leaderboard
 
@@ -28,6 +28,4 @@ Feature List
 [] My Profile
 
     [] My Score, My Position 
-    
-    [] List of my predictions
     
