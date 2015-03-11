@@ -70,6 +70,7 @@ Parse.Cloud.beforeDelete("prediktion", function(request, response){
 
 Parse.Cloud.afterSave("prediktion", function(request, response) {
 	console.log("After saving a Prediktion");
+	var user = request.user;
 	Mandrill.sendEmail({
 		message: {
 			text: JSON.stringify(request.object, null, 2),
@@ -78,8 +79,8 @@ Parse.Cloud.afterSave("prediktion", function(request, response) {
 			from_name: "Prediktor App Admin",
 			to: [
 			{
-				email: "nirmaljpatel@gmail.com",
-				name: "Your Name"
+				email: Parse.User.current().getEmail()?Parse.User.current().getEmail():nirmaljpatel@gmail.com,
+				name: Parse.User.current().get("name")
 			}
 			]
 		},
@@ -105,8 +106,8 @@ Parse.Cloud.afterDelete("prediktion", function(request, response) {
 			from_name: "Prediktor App Admin",
 			to: [
 			{
-				email: "nirmaljpatel@gmail.com",
-				name: "Your Name"
+				email: Parse.User.current().getEmail()?Parse.User.current().getEmail():nirmaljpatel@gmail.com,
+				name: Parse.User.current().get("name")
 			}
 			]
 		},
